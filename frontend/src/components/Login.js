@@ -240,18 +240,26 @@ const Login = () => {
               <h3 className="text-3xl font-bold text-slate-900">Transform Your Teaching</h3>
               
               <ul className="space-y-4">
-                {[
-                  "Generate comprehensive lesson plans in minutes",
-                  "Aligned with AQF Level 9 standards", 
-                  "Customized for UC MITS program",
-                  "Export to PDF and Word formats",
-                  "Save 60-70% of planning time"
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-700">{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Generate comprehensive lesson plans in minutes</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Aligned with AQF Level 9 standards</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Customized for UC MITS program</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Export to PDF and Word formats</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Save 60-70% of planning time</span>
+                </li>
               </ul>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
