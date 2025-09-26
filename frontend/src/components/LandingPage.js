@@ -189,7 +189,7 @@ const LandingPage = () => {
 
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
               <div className="mb-6">
-                <FileExport className="w-12 h-12 text-orange-600" />
+                <Download className="w-12 h-12 text-orange-600" />
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-4">Document Export</h3>
               <p className="text-slate-600 leading-relaxed">Generate and export lesson plans in PDF and Word formats for easy sharing and implementation.</p>
