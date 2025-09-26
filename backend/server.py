@@ -80,6 +80,38 @@ def get_user_llm_chat(api_key: str):
     
     return chat
 
+async def retry_llm_call(chat, message, max_retries=3, base_delay=2):
+    """Retry LLM calls with exponential backoff for rate limiting/overload issues."""
+    for attempt in range(max_retries):
+        try:
+            logger.info(f"LLM call attempt {attempt + 1}/{max_retries}")
+            response = await chat.send_message(message)
+            logger.info("LLM call successful")
+            return response
+        except Exception as e:
+            error_str = str(e).lower()
+            
+            # Check if it's a rate limiting or overload error
+            if any(keyword in error_str for keyword in ['overloaded', 'rate limit', 'quota', 'unavailable', '503', '429']):
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # Exponential backoff
+                    logger.warning(f"LLM API overloaded/rate limited. Retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    await asyncio.sleep(delay)
+                    continue
+                else:
+                    logger.error("Max retries exceeded for LLM API overload/rate limiting")
+                    raise HTTPException(
+                        status_code=429, 
+                        detail="The AI service is currently overloaded. Please try again in a few minutes. If you're using your own API key, you may need to check your quota or upgrade your plan."
+                    )
+            else:
+                # For other errors, don't retry
+                logger.error(f"LLM call failed with non-retryable error: {str(e)}")
+                raise e
+    
+    # This shouldn't be reached, but just in case
+    raise HTTPException(status_code=500, detail="Failed to process request after multiple attempts")
+
 # Authentication helper functions
 def hash_password(password: str) -> str:
     """Hash password using SHA-256."""
