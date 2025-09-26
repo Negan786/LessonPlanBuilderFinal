@@ -687,7 +687,10 @@ async def generate_lesson_plan(
         raise HTTPException(status_code=500, detail=f"Failed to generate lesson plan: {str(e)}")
 
 @api_router.get("/download-lesson-plan/{lesson_plan_id}")
-async def download_lesson_plan(lesson_plan_id: str):
+async def download_lesson_plan(
+    lesson_plan_id: str,
+    current_user: dict = Depends(get_current_user)
+):
     """Download lesson plan as PDF"""
     try:
         # Get lesson plan from database
