@@ -585,7 +585,7 @@ async def upload_pdf(
         """
         
         user_message = UserMessage(text=extraction_prompt)
-        response = await chat.send_message(user_message)
+        response = await retry_llm_call(chat, user_message)
         
         # Parse LLM response
         try:
