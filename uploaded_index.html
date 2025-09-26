@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lesson Plan Generator - University of Canberra</title>
+    <link rel="stylesheet" href="home-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>AI Lesson Planner</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="nav-auth">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered Lesson Plan Generator</h1>
+                <p class="hero-subtitle">Transform your teaching with intelligent lesson planning designed specifically for University of Canberra's Master of Information Technology and Systems program</p>
+                <div class="hero-buttons">
+                    <a href="login.html" class="btn-primary">Get Started</a>
+                    <a href="#about" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-illustration">
+                    <i class="fas fa-robot"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Our Platform</h2>
+                <p>Revolutionizing IT education through intelligent lesson planning</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Addressing the Challenge</h3>
+                    <p>The current Information Technology Education landscape faces significant challenges in curriculum delivery and lesson plan development. Educators in IT programs, especially at the graduate level, face critical challenges like time constraints and resource limitations when creating comprehensive and industry-aligned curriculum.</p>
+                    
+                    <h3>Our Solution</h3>
+                    <p>This project develops an AI-driven Web Application that leverages Large Language Models (LLM) and Retrieval-Augmented Generation (RAG) technology for building comprehensive lesson plans for IT education at graduate level, specifically targeting the University of Canberra's Master of Information Technology and Systems Program.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h4>60-70%</h4>
+                            <p>Reduction in preparation time</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>2-3 min</h4>
+                            <p>Complete lesson plan generation</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>3 Units</h4>
+                            <p>Semester 1, Year 1 coverage</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-illustration">
+                        <div class="illustration-card">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI-Powered</h4>
+                            <p>Advanced AI algorithms</p>
+                        </div>
+                        <div class="illustration-card">
+                            <i class="fas fa-university"></i>
+                            <h4>UC Aligned</h4>
+                            <p>University standards</p>
+                        </div>
+                        <div class="illustration-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Quality Assured</h4>
+                            <p>AQF Level 9 compliant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>Everything you need for comprehensive lesson planning</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>RAG-based Content Generation</h3>
+                    <p>Sophisticated retrieval system that searches curated educational content databases to provide context for LLM-powered lesson plan generation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Responsive Web Interface</h3>
+                    <p>User-friendly web application enabling educators to specify subjects, topics, learning objectives, and assessment preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Content Database Management</h3>
+                    <p>Comprehensive database consisting of lesson plan examples, curriculum standards, and best teaching practices in IT education.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <h3>Document Export</h3>
+                    <p>Generate and export lesson plans in PDF and Word formats for easy sharing and implementation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>Content validation system ensuring generated lesson plans meet educational standards (AQF, ACS, SFIA).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>MITS Program Focus</h3>
+                    <p>Specifically designed for Introduction to IT, Data Science, and Statistics courses in Semester 1, Year 1.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Teaching?</h2>
+                <p>Join educators who are already saving 60-70% of their lesson planning time with our AI-powered platform</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn-primary">Start Free Trial</a>
+                    <a href="login.html" class="btn-secondary">Login to Account</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-university"></i>
+                        <h3>University of Canberra</h3>
+                        <p>Faculty of Science and Technology<br>
+                        Master of Information Technology and Systems Program</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Support</h3>
+                        <p>support@lessonplanner.uc.edu.au</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone Support</h3>
+                        <p>+61 2 6201 5111</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>AI Lesson Planner</span>
+                    </div>
+                    <p>Transforming IT education through intelligent lesson planning at the University of Canberra.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 University of Canberra - Faculty of Science and Technology. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home-script.js"></script>
+</body>
+</html>
+
