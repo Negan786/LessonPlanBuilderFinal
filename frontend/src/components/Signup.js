@@ -98,11 +98,11 @@ const Signup = () => {
       setError("Please enter a valid email address");
       return false;
     }
-    if (!formData.institution) {
+    if (!formData.institution || formData.institution === "") {
       setError("Please select your institution");
       return false;
     }
-    if (!formData.department) {
+    if (!formData.department || formData.department.trim() === "") {
       setError("Department/Faculty is required");
       return false;
     }
