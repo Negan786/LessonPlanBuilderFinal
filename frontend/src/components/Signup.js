@@ -464,18 +464,26 @@ const Signup = () => {
               <h3 className="text-3xl font-bold text-slate-900">Why Choose Our Platform?</h3>
               
               <ul className="space-y-4">
-                {[
-                  "AI-powered lesson plan generation",
-                  "Aligned with educational standards", 
-                  "Customized for your curriculum",
-                  "Export in multiple formats",
-                  "Save hours of preparation time"
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-700">{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">AI-powered lesson plan generation</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Aligned with educational standards</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Customized for your curriculum</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Export in multiple formats</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-700">Save hours of preparation time</span>
+                </li>
               </ul>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
