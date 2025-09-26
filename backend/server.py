@@ -53,6 +53,7 @@ api_router = APIRouter(prefix="/api")
 
 # Initialize LLM Chat
 def get_llm_chat():
+    """Initialize LLM client for educational content generation."""
     api_key = os.environ.get('EMERGENT_LLM_KEY')
     if not api_key:
         raise HTTPException(status_code=500, detail="LLM API key not configured")
@@ -64,6 +65,56 @@ def get_llm_chat():
     ).with_model("gemini", "gemini-2.0-flash")
     
     return chat
+
+def get_user_llm_chat(api_key: str):
+    """Initialize LLM client with user's API key."""
+    if not api_key:
+        # Fallback to system key
+        return get_llm_chat()
+    
+    chat = LlmChat(
+        api_key=api_key,
+        session_id=str(uuid.uuid4()),
+        system_message="You are an expert educational content analyzer and lesson plan generator."
+    ).with_model("gemini", "gemini-2.0-flash")
+    
+    return chat
+
+# Authentication helper functions
+def hash_password(password: str) -> str:
+    """Hash password using SHA-256."""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def verify_password(password: str, hashed: str) -> bool:
+    """Verify password against hash."""
+    return hashlib.sha256(password.encode()).hexdigest() == hashed
+
+def create_jwt_token(user_data: dict) -> str:
+    """Create JWT token for user."""
+    payload = {
+        "user_id": user_data["id"],
+        "email": user_data["email"],
+        "exp": datetime.utcnow() + timedelta(hours=JWT_EXPIRATION_HOURS)
+    }
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+def verify_jwt_token(token: str) -> dict:
+    """Verify JWT token and return payload."""
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token has expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    """Get current authenticated user."""
+    payload = verify_jwt_token(credentials.credentials)
+    user_email = payload.get("email")
+    if user_email not in users_db:
+        raise HTTPException(status_code=401, detail="User not found")
+    return users_db[user_email]
 
 # Define Models
 class User(BaseModel):
