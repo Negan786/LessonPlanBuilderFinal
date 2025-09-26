@@ -163,46 +163,53 @@ const LandingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Search className="w-12 h-12 text-blue-600" />,
-                title: "RAG-based Content Generation",
-                description: "Sophisticated retrieval system that searches curated educational content databases to provide context for LLM-powered lesson plan generation."
-              },
-              {
-                icon: <Globe className="w-12 h-12 text-green-600" />,
-                title: "Responsive Web Interface",
-                description: "User-friendly web application enabling educators to specify subjects, topics, learning objectives, and assessment preferences."
-              },
-              {
-                icon: <Database className="w-12 h-12 text-purple-600" />,
-                title: "Content Database Management",
-                description: "Comprehensive database consisting of lesson plan examples, curriculum standards, and best teaching practices in IT education."
-              },
-              {
-                icon: <FileExport className="w-12 h-12 text-orange-600" />,
-                title: "Document Export",
-                description: "Generate and export lesson plans in PDF and Word formats for easy sharing and implementation."
-              },
-              {
-                icon: <Shield className="w-12 h-12 text-red-600" />,
-                title: "Quality Assurance",
-                description: "Content validation system ensuring generated lesson plans meet educational standards (AQF, ACS, SFIA)."
-              },
-              {
-                icon: <GraduationCap className="w-12 h-12 text-indigo-600" />,
-                title: "MITS Program Focus",
-                description: "Specifically designed for Introduction to IT, Data Science, and Statistics courses in Semester 1, Year 1."
-              }
-            ].map((feature, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
-                <div className="mb-6">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-4">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <Search className="w-12 h-12 text-blue-600" />
               </div>
-            ))}
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">RAG-based Content Generation</h3>
+              <p className="text-slate-600 leading-relaxed">Sophisticated retrieval system that searches curated educational content databases to provide context for LLM-powered lesson plan generation.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <Globe className="w-12 h-12 text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Responsive Web Interface</h3>
+              <p className="text-slate-600 leading-relaxed">User-friendly web application enabling educators to specify subjects, topics, learning objectives, and assessment preferences.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <Database className="w-12 h-12 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Content Database Management</h3>
+              <p className="text-slate-600 leading-relaxed">Comprehensive database consisting of lesson plan examples, curriculum standards, and best teaching practices in IT education.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <FileExport className="w-12 h-12 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Document Export</h3>
+              <p className="text-slate-600 leading-relaxed">Generate and export lesson plans in PDF and Word formats for easy sharing and implementation.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <Shield className="w-12 h-12 text-red-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Quality Assurance</h3>
+              <p className="text-slate-600 leading-relaxed">Content validation system ensuring generated lesson plans meet educational standards (AQF, ACS, SFIA).</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="mb-6">
+                <GraduationCap className="w-12 h-12 text-indigo-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">MITS Program Focus</h3>
+              <p className="text-slate-600 leading-relaxed">Specifically designed for Introduction to IT, Data Science, and Statistics courses in Semester 1, Year 1.</p>
+            </div>
           </div>
         </div>
       </section>
