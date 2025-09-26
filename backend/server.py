@@ -711,7 +711,7 @@ async def generate_lesson_plan(
         """
         
         user_message = UserMessage(text=generation_prompt)
-        response = await chat.send_message(user_message)
+        response = await retry_llm_call(chat, user_message)
         
         # Create lesson plan object
         lesson_plan = LessonPlan(
