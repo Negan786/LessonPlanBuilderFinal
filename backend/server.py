@@ -490,7 +490,10 @@ async def get_options():
     }
 
 @api_router.post("/upload-pdf", response_model=PDFExtractionResult)
-async def upload_pdf(file: UploadFile = File(...)):
+async def upload_pdf(
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user)
+):
     """Upload PDF and extract subject information using LLM"""
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF")
@@ -509,8 +512,9 @@ async def upload_pdf(file: UploadFile = File(...)):
         if not pdf_text.strip():
             raise HTTPException(status_code=400, detail="No text found in PDF")
         
-        # Use LLM to extract structured information
-        chat = get_llm_chat()
+        # Use LLM to extract structured information (use user's API key if available)
+        user_api_key = current_user.get("api_key")
+        chat = get_user_llm_chat(user_api_key)
         
         extraction_prompt = f"""
         Analyze the following academic subject outline PDF content and extract the required information in JSON format.
