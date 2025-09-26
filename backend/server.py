@@ -693,19 +693,34 @@ async def download_lesson_plan(
 ):
     """Download lesson plan as PDF"""
     try:
+        logger.info(f"Attempting to download lesson plan: {lesson_plan_id}")
+        
         # Get lesson plan from database
         lesson_plan_doc = await db.lesson_plans.find_one({"id": lesson_plan_id})
         if not lesson_plan_doc:
+            logger.error(f"Lesson plan not found: {lesson_plan_id}")
             raise HTTPException(status_code=404, detail="Lesson plan not found")
         
+        logger.info("Found lesson plan in database")
         lesson_plan = LessonPlan(**lesson_plan_doc)
         
         # Generate PDF
+        logger.info("Creating temporary PDF file")
         temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf')
+        temp_pdf.close()  # Close the file handle before generating PDF
+        
+        logger.info(f"Generating PDF at: {temp_pdf.name}")
         generate_lesson_plan_pdf(lesson_plan, temp_pdf.name)
         
+        # Check if file was created
+        if not os.path.exists(temp_pdf.name):
+            logger.error("PDF file was not created")
+            raise HTTPException(status_code=500, detail="Failed to create PDF file")
+        
+        logger.info(f"PDF generated successfully, file size: {os.path.getsize(temp_pdf.name)} bytes")
+        
         # Return file
-        filename = f"lesson_plan_{lesson_plan.request_data.subject_name}_{lesson_plan_id[:8]}.pdf"
+        filename = f"lesson_plan_{lesson_plan.request_data.subject_name.replace(' ', '_')}_{lesson_plan_id[:8]}.pdf"
         return FileResponse(
             temp_pdf.name,
             media_type="application/pdf",
@@ -713,6 +728,7 @@ async def download_lesson_plan(
         )
         
     except Exception as e:
+        logger.error(f"PDF download error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to generate PDF: {str(e)}")
 
 @api_router.post("/status", response_model=StatusCheck)
