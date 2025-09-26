@@ -496,14 +496,17 @@ async def validate_api_key(
         chat = get_user_llm_chat(api_data.apiKey)
         
         # Try a simple test message
-        test_message = UserMessage(text="Hello")
-        response = await chat.send_message(test_message)
+        test_message = UserMessage(text="Hello, please respond with 'API key is working correctly'")
+        response = await retry_llm_call(chat, test_message)
         
         # If successful, store the API key for the user
         users_db[current_user["email"]]["api_key"] = api_data.apiKey
         
         return {"success": True, "message": "API key validated and saved successfully"}
     
+    except HTTPException as he:
+        # Re-raise HTTP exceptions from retry mechanism
+        raise he
     except Exception as e:
         logger.error(f"API key validation failed: {str(e)}")
         raise HTTPException(status_code=400, detail="Invalid API key or failed to connect to Gemini API")
