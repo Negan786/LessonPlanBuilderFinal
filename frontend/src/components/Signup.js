@@ -254,15 +254,15 @@ const Signup = () => {
                 <div className="space-y-2">
                   <Label className="flex items-center space-x-2">
                     <GraduationCap className="w-4 h-4 text-slate-600" />
-                    <span>Institution</span>
+                    <span>Institution *</span>
                   </Label>
-                  <Select value={formData.institution} onValueChange={handleSelectChange('institution')}>
+                  <Select value={formData.institution} onValueChange={handleSelectChange('institution')} required>
                     <SelectTrigger className="h-10" data-testid="institution-select">
                       <SelectValue placeholder="Select your institution" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="uc">University of Canberra</SelectItem>
-                      <SelectItem value="other">Other Institution</SelectItem>
+                      <SelectItem value="University of Canberra">University of Canberra</SelectItem>
+                      <SelectItem value="Other Institution">Other Institution</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
