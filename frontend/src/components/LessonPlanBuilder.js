@@ -129,6 +129,11 @@ const LessonPlanBuilder = () => {
         return;
       }
       setError(error.response?.data?.detail || "Failed to upload and process PDF");
+      
+      // Show specific guidance for overload errors
+      if (error.response?.status === 429 || error.response?.data?.detail?.includes('overloaded')) {
+        setError("The AI service is currently experiencing high demand. Please wait a few minutes and try again. If you're using your own API key, check your quota in the Google AI Studio.");
+      }
     } finally {
       setIsUploading(false);
     }
