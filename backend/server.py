@@ -248,129 +248,138 @@ def extract_text_from_pdf(file_path: str) -> str:
 
 # Helper function to generate PDF
 def generate_lesson_plan_pdf(lesson_plan: LessonPlan, output_path: str):
-    doc = SimpleDocTemplate(output_path, pagesize=letter)
-    styles = getSampleStyleSheet()
-    
-    # Custom styles
-    title_style = ParagraphStyle(
-        'CustomTitle',
-        parent=styles['Heading1'],
-        fontSize=18,
-        spaceAfter=20,
-        textColor=colors.darkblue,
-        alignment=1  # Center alignment
-    )
-    
-    section_heading_style = ParagraphStyle(
-        'SectionHeading',
-        parent=styles['Heading2'],
-        fontSize=14,
-        spaceBefore=15,
-        spaceAfter=10,
-        textColor=colors.darkblue,
-        fontName='Helvetica-Bold'
-    )
-    
-    subsection_heading_style = ParagraphStyle(
-        'SubsectionHeading',
-        parent=styles['Heading3'],
-        fontSize=12,
-        spaceBefore=10,
-        spaceAfter=5,
-        textColor=colors.black,
-        fontName='Helvetica-Bold'
-    )
-    
-    normal_style = styles['Normal']
-    bullet_style = ParagraphStyle(
-        'BulletStyle',
-        parent=styles['Normal'],
-        leftIndent=20,
-        bulletIndent=10,
-        spaceBefore=3,
-        spaceAfter=3
-    )
-    
-    story = []
-    
-    # Title
-    story.append(Paragraph("LESSON PLAN", title_style))
-    story.append(Spacer(1, 20))
-    
-    # Lesson details table
-    data = [
-        ["Subject:", lesson_plan.request_data.subject_name],
-        ["Lecture Topic:", lesson_plan.request_data.lecture_topic],
-        ["Focus Topic:", lesson_plan.request_data.focus_topic or "General Coverage"],
-        ["Bloom's Taxonomy Level:", lesson_plan.request_data.blooms_taxonomy],
-        ["AQF Level:", lesson_plan.request_data.aqf_level],
-        ["Duration:", lesson_plan.request_data.lesson_duration],
-        ["Generated:", lesson_plan.generated_at.strftime("%Y-%m-%d %H:%M:%S")]
-    ]
-    
-    table = Table(data, colWidths=[2*inch, 4*inch])
-    table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-        ('TEXTCOLOR', (0, 0), (0, -1), colors.black),
-        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
-        ('BACKGROUND', (1, 0), (1, -1), colors.white),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
-    ]))
-    
-    story.append(table)
-    story.append(Spacer(1, 30))
-    
-    # Process content sections
-    content_sections = lesson_plan.content.split('\n\n')
-    
-    for section in content_sections:
-        section = section.strip()
-        if not section:
-            continue
-            
-        lines = section.split('\n')
-        first_line = lines[0].strip()
+    try:
+        logger.info(f"Starting PDF generation for lesson plan: {lesson_plan.id}")
         
-        # Check if first line is a section heading (ALL CAPS)
-        if first_line.isupper() and len(first_line) < 100:
-            # Add section heading
-            story.append(Paragraph(first_line, section_heading_style))
+        doc = SimpleDocTemplate(output_path, pagesize=letter)
+        styles = getSampleStyleSheet()
+        
+        # Custom styles
+        title_style = ParagraphStyle(
+            'CustomTitle',
+            parent=styles['Heading1'],
+            fontSize=18,
+            spaceAfter=20,
+            textColor=colors.darkblue,
+            alignment=1  # Center alignment
+        )
+        
+        section_heading_style = ParagraphStyle(
+            'SectionHeading',
+            parent=styles['Heading2'],
+            fontSize=14,
+            spaceBefore=15,
+            spaceAfter=10,
+            textColor=colors.darkblue,
+            fontName='Helvetica-Bold'
+        )
+        
+        subsection_heading_style = ParagraphStyle(
+            'SubsectionHeading',
+            parent=styles['Heading3'],
+            fontSize=12,
+            spaceBefore=10,
+            spaceAfter=5,
+            textColor=colors.black,
+            fontName='Helvetica-Bold'
+        )
+        
+        normal_style = styles['Normal']
+        bullet_style = ParagraphStyle(
+            'BulletStyle',
+            parent=styles['Normal'],
+            leftIndent=20,
+            bulletIndent=10,
+            spaceBefore=3,
+            spaceAfter=3
+        )
+        
+        story = []
+        
+        # Title
+        story.append(Paragraph("LESSON PLAN", title_style))
+        story.append(Spacer(1, 20))
+        
+        # Lesson details table
+        data = [
+            ["Subject:", lesson_plan.request_data.subject_name or "N/A"],
+            ["Lecture Topic:", lesson_plan.request_data.lecture_topic or "N/A"],
+            ["Focus Topic:", lesson_plan.request_data.focus_topic or "General Coverage"],
+            ["Bloom's Taxonomy Level:", lesson_plan.request_data.blooms_taxonomy or "N/A"],
+            ["AQF Level:", lesson_plan.request_data.aqf_level or "N/A"],
+            ["Duration:", lesson_plan.request_data.lesson_duration or "N/A"],
+            ["Generated:", lesson_plan.generated_at.strftime("%Y-%m-%d %H:%M:%S")]
+        ]
+        
+        table = Table(data, colWidths=[2*inch, 4*inch])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+            ('TEXTCOLOR', (0, 0), (0, -1), colors.black),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+            ('BACKGROUND', (1, 0), (1, -1), colors.white),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ]))
+        
+        story.append(table)
+        story.append(Spacer(1, 30))
+        
+        # Process content sections
+        content_sections = lesson_plan.content.split('\n\n')
+        
+        for section in content_sections:
+            section = section.strip()
+            if not section:
+                continue
+                
+            lines = section.split('\n')
+            first_line = lines[0].strip()
             
-            # Process remaining lines in this section
-            for line in lines[1:]:
-                line = line.strip()
-                if not line:
-                    continue
-                    
-                # Check if it's a subsection heading (starts with capital and ends with minutes)
-                if ('(' in line and 'minutes)' in line) or (line.endswith('minutes')):
-                    story.append(Paragraph(line, subsection_heading_style))
-                elif line.startswith('- '):
-                    # Bullet point
-                    story.append(Paragraph(f"• {line[2:]}", bullet_style))
-                else:
-                    # Regular paragraph
-                    story.append(Paragraph(line, normal_style))
-                    story.append(Spacer(1, 6))
-        else:
-            # Regular content block
-            for line in lines:
-                line = line.strip()
-                if not line:
-                    continue
-                    
-                if line.startswith('- '):
-                    # Bullet point
-                    story.append(Paragraph(f"• {line[2:]}", bullet_style))
-                else:
-                    # Regular paragraph
-                    story.append(Paragraph(line, normal_style))
-                    story.append(Spacer(1, 6))
-    
-    doc.build(story)
+            # Check if first line is a section heading (ALL CAPS)
+            if first_line.isupper() and len(first_line) < 100:
+                # Add section heading
+                story.append(Paragraph(first_line, section_heading_style))
+                
+                # Process remaining lines in this section
+                for line in lines[1:]:
+                    line = line.strip()
+                    if not line:
+                        continue
+                        
+                    # Check if it's a subsection heading (starts with capital and ends with minutes)
+                    if ('(' in line and 'minutes)' in line) or (line.endswith('minutes')):
+                        story.append(Paragraph(line, subsection_heading_style))
+                    elif line.startswith('- '):
+                        # Bullet point
+                        story.append(Paragraph(f"• {line[2:]}", bullet_style))
+                    else:
+                        # Regular paragraph
+                        story.append(Paragraph(line, normal_style))
+                        story.append(Spacer(1, 6))
+            else:
+                # Regular content block
+                for line in lines:
+                    line = line.strip()
+                    if not line:
+                        continue
+                        
+                    if line.startswith('- '):
+                        # Bullet point
+                        story.append(Paragraph(f"• {line[2:]}", bullet_style))
+                    else:
+                        # Regular paragraph
+                        story.append(Paragraph(line, normal_style))
+                        story.append(Spacer(1, 6))
+        
+        logger.info("Building PDF document")
+        doc.build(story)
+        logger.info(f"PDF generation completed: {output_path}")
+        
+    except Exception as e:
+        logger.error(f"Error in PDF generation: {str(e)}")
+        raise
 
 # API Routes
 @api_router.get("/")
