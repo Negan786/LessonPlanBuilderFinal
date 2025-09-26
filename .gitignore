@@ -84,3 +84,7 @@ android-sdk/
 *.temp
 temp/
 tmp/
+-e 
+# Environment files
+*.env
+*.env.*
