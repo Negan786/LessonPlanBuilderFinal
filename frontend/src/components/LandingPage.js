@@ -170,7 +170,7 @@ const LandingPage = () => {
                 description: "Sophisticated retrieval system that searches curated educational content databases to provide context for LLM-powered lesson plan generation."
               },
               {
-                icon: <Desktop className="w-12 h-12 text-green-600" />,
+                icon: <Globe className="w-12 h-12 text-green-600" />,
                 title: "Responsive Web Interface",
                 description: "User-friendly web application enabling educators to specify subjects, topics, learning objectives, and assessment preferences."
               },
