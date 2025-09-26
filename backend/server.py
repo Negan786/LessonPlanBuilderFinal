@@ -66,6 +66,48 @@ def get_llm_chat():
     return chat
 
 # Define Models
+class User(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    firstName: str
+    lastName: str
+    email: str
+    institution: str
+    department: str
+    password_hash: str
+    api_key: Optional[str] = None
+    newsletter: bool = False
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class UserSignup(BaseModel):
+    firstName: str
+    lastName: str
+    email: str
+    institution: str
+    department: str
+    password: str
+    newsletter: bool = False
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+class ApiKeyValidation(BaseModel):
+    apiKey: str
+
+class UserResponse(BaseModel):
+    id: str
+    firstName: str
+    lastName: str
+    email: str
+    institution: str
+    department: str
+    hasApiKey: bool = False
+
+class AuthResponse(BaseModel):
+    success: bool
+    token: str
+    user: UserResponse
+
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
