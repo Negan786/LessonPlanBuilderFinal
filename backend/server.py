@@ -377,6 +377,109 @@ def generate_lesson_plan_pdf(lesson_plan: LessonPlan, output_path: str):
 async def root():
     return {"message": "LLM Lesson Plan Builder API"}
 
+# Authentication routes
+@api_router.post("/auth/signup", response_model=AuthResponse)
+async def signup(user_data: UserSignup):
+    """User registration endpoint."""
+    # Check if user already exists
+    if user_data.email in users_db:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Create new user
+    user = User(
+        firstName=user_data.firstName,
+        lastName=user_data.lastName,
+        email=user_data.email,
+        institution=user_data.institution,
+        department=user_data.department,
+        password_hash=hash_password(user_data.password),
+        newsletter=user_data.newsletter
+    )
+    
+    # Store user (in production, save to database)
+    users_db[user.email] = user.dict()
+    
+    # Create JWT token
+    token = create_jwt_token(user.dict())
+    
+    # Return response
+    user_response = UserResponse(
+        id=user.id,
+        firstName=user.firstName,
+        lastName=user.lastName,
+        email=user.email,
+        institution=user.institution,
+        department=user.department,
+        hasApiKey=bool(user.api_key)
+    )
+    
+    return AuthResponse(success=True, token=token, user=user_response)
+
+@api_router.post("/auth/login", response_model=AuthResponse)
+async def login(login_data: UserLogin):
+    """User login endpoint."""
+    # Check if user exists
+    if login_data.email not in users_db:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    user = users_db[login_data.email]
+    
+    # Verify password
+    if not verify_password(login_data.password, user["password_hash"]):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    # Create JWT token
+    token = create_jwt_token(user)
+    
+    # Return response
+    user_response = UserResponse(
+        id=user["id"],
+        firstName=user["firstName"],
+        lastName=user["lastName"],
+        email=user["email"],
+        institution=user["institution"],
+        department=user["department"],
+        hasApiKey=bool(user.get("api_key"))
+    )
+    
+    return AuthResponse(success=True, token=token, user=user_response)
+
+@api_router.post("/auth/validate-api-key")
+async def validate_api_key(
+    api_data: ApiKeyValidation,
+    current_user: dict = Depends(get_current_user)
+):
+    """Validate and store user's Gemini API key."""
+    try:
+        # Test the API key by making a simple call
+        chat = get_user_llm_chat(api_data.apiKey)
+        
+        # Try a simple test message
+        test_message = UserMessage(text="Hello")
+        response = await chat.send_message(test_message)
+        
+        # If successful, store the API key for the user
+        users_db[current_user["email"]]["api_key"] = api_data.apiKey
+        
+        return {"success": True, "message": "API key validated and saved successfully"}
+    
+    except Exception as e:
+        logger.error(f"API key validation failed: {str(e)}")
+        raise HTTPException(status_code=400, detail="Invalid API key or failed to connect to Gemini API")
+
+@api_router.get("/auth/profile", response_model=UserResponse)
+async def get_profile(current_user: dict = Depends(get_current_user)):
+    """Get current user profile."""
+    return UserResponse(
+        id=current_user["id"],
+        firstName=current_user["firstName"],
+        lastName=current_user["lastName"],
+        email=current_user["email"],
+        institution=current_user["institution"],
+        department=current_user["department"],
+        hasApiKey=bool(current_user.get("api_key"))
+    )
+
 @api_router.get("/options")
 async def get_options():
     """Get standard dropdown options"""
