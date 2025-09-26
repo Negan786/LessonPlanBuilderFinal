@@ -56,7 +56,11 @@ const ApiSetup = () => {
       }
     } catch (error) {
       console.error('API key validation error:', error);
-      setError(error.response?.data?.detail || "Invalid API key. Please check your key and try again.");
+      if (error.response?.status === 429 || error.response?.data?.detail?.includes('overloaded')) {
+        setError("The AI service is currently overloaded. Your API key appears to be valid, but please try validation again in a few minutes. You can also click 'Skip for Now' to proceed.");
+      } else {
+        setError(error.response?.data?.detail || "Invalid API key. Please check your key and try again.");
+      }
     } finally {
       setIsValidating(false);
     }
