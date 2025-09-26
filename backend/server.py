@@ -596,10 +596,15 @@ async def upload_pdf(
             os.unlink(temp_file_path)
 
 @api_router.post("/generate-lesson-plan", response_model=LessonPlan)
-async def generate_lesson_plan(request: LessonPlanRequest):
+async def generate_lesson_plan(
+    request: LessonPlanRequest,
+    current_user: dict = Depends(get_current_user)
+):
     """Generate lesson plan using LLM"""
     try:
-        chat = get_llm_chat()
+        # Use user's API key if available
+        user_api_key = current_user.get("api_key")
+        chat = get_user_llm_chat(user_api_key)
         
         generation_prompt = f"""
         Create a detailed lesson plan based on the following parameters:
