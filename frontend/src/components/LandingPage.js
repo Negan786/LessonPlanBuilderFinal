@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
-import { GraduationCap, Brain, Search, Database, FileExport, Shield, Desktop, ChartLine, Users, Laptop, CheckCircle, Star } from "lucide-react";
+import { GraduationCap, Brain, Search, Database, FileExport, Shield, Globe, ChartLine, Users, Laptop, CheckCircle } from "lucide-react";
 
 const LandingPage = () => {
   const navigate = useNavigate();
