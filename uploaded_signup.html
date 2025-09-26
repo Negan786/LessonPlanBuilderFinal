@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - AI Lesson Plan Generator</title>
+    <link rel="stylesheet" href="auth-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-background">
+            <div class="auth-overlay"></div>
+            <div class="floating-elements">
+                <div class="floating-element"><i class="fas fa-graduation-cap"></i></div>
+                <div class="floating-element"><i class="fas fa-brain"></i></div>
+                <div class="floating-element"><i class="fas fa-laptop-code"></i></div>
+                <div class="floating-element"><i class="fas fa-chart-line"></i></div>
+                <div class="floating-element"><i class="fas fa-users"></i></div>
+            </div>
+        </div>
+        
+        <div class="auth-content">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h1>AI Lesson Planner</h1>
+                    </div>
+                    <h2>Create Account</h2>
+                    <p>Join thousands of educators transforming their teaching</p>
+                </div>
+                
+                <form class="auth-form" id="signupForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-user"></i>
+                                First Name
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                            <div class="form-error" id="firstNameError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-user"></i>
+                                Last Name
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                            <div class="form-error" id="lastNameError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <div class="form-error" id="emailError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="institution">
+                            <i class="fas fa-university"></i>
+                            Institution
+                        </label>
+                        <select id="institution" name="institution" required>
+                            <option value="">Select your institution</option>
+                            <option value="uc">University of Canberra</option>
+                            <option value="other">Other Institution</option>
+                        </select>
+                        <div class="form-error" id="institutionError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">
+                            <i class="fas fa-building"></i>
+                            Department/Faculty
+                        </label>
+                        <input type="text" id="department" name="department" placeholder="e.g., Faculty of Science and Technology" required>
+                        <div class="form-error" id="departmentError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                            <button type="button" class="password-toggle" id="passwordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text">Password strength</span>
+                        </div>
+                        <div class="form-error" id="passwordError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                            <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-error" id="confirmPasswordError"></div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                        </label>
+                        
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="newsletter">
+                            <span class="checkmark"></span>
+                            Send me updates about new features and educational resources
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" id="signupBtn">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                    
+                    <div class="auth-divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="social-btn google-btn">
+                            <i class="fab fa-google"></i>
+                            Sign up with Google
+                        </button>
+                        <button type="button" class="social-btn microsoft-btn">
+                            <i class="fab fa-microsoft"></i>
+                            Sign up with Microsoft
+                        </button>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html">Sign in here</a></p>
+                        <p><a href="index.html">← Back to Home</a></p>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="auth-info">
+                <div class="info-content">
+                    <h3>Why Choose Our Platform?</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> AI-powered lesson plan generation</li>
+                        <li><i class="fas fa-check"></i> Aligned with educational standards</li>
+                        <li><i class="fas fa-check"></i> Customized for your curriculum</li>
+                        <li><i class="fas fa-check"></i> Export in multiple formats</li>
+                        <li><i class="fas fa-check"></i> Save hours of preparation time</li>
+                    </ul>
+                    
+                    <div class="stats-preview">
+                        <div class="stat">
+                            <h4>10,000+</h4>
+                            <p>Lesson plans generated</p>
+                        </div>
+                        <div class="stat">
+                            <h4>500+</h4>
+                            <p>Active educators</p>
+                        </div>
+                        <div class="stat">
+                            <h4>95%</h4>
+                            <p>Satisfaction rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Creating your account...</h3>
+            <p>Please wait while we set up your profile</p>
+        </div>
+    </div>
+    
+    <script src="auth-script.js"></script>
+</body>
+</html>
+
