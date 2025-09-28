@@ -261,13 +261,6 @@ const Login = () => {
                   <span className="text-slate-700">Save 60-70% of planning time</span>
                 </li>
               </ul>
-
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
-                <blockquote className="text-slate-700 italic mb-4">
-                  "This AI lesson planner has revolutionized how I prepare my IT courses. The quality and alignment with university standards is exceptional."
-                </blockquote>
-                <cite className="text-slate-600 font-medium">- Dr. Sarah Johnson, UC Faculty</cite>
-              </div>
             </div>
           </div>
         </div>
